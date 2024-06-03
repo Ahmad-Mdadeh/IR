@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Information Retrieval </title>
+</head>
+<body>
+     <section class="contact" id="contact">
+        <h2 class="heading">Re<span>search</span></h2>
+        <form action="/" method="POST" id="myForm">
+            <textarea name="query" id="myTextarea" cols="30" rows="4" placeholder="Your Query"></textarea>
+            <div class="result">
+               {% for item in result %}
+                    <p>{{ item }}</p>
+                {% endfor %}
+            </div>
+            <div>
+                <p>{{ number_of_results }}</p>
+            </div>
+            <div class="type">
+                <label for="data_set">
+                    <select id="data_set" name="data_set">
+                        <option value="Quora">Quora</option>
+                        <option value="Lotte">Lotte</option>
+                    </select>
+                </label>
+            </div>
+            <button  type="submit" class="btn">submit</button>
+        </form>
+    </section>
+
+    <script>
+        document.getElementById("myTextarea").addEventListener("keypress", function(event) {      
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                document.getElementById("myForm").submit();
+            }
+        });
+        </script>
+</body>
+</html>
